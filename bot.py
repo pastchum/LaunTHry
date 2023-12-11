@@ -18,7 +18,8 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('Hello, here are the available commands for the bot! \n' + 
                                     '/start - start the bot \n' + 
                                     '/check - check what machines are available in each block \n' + 
-                                    '/using - declare your usage of a machine')
+                                    '/using - declare your usage of a machine\n'
+                                    '/cancel - undo declaring your usage of a machine')
 
 async def check_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['command'] = '/check'
