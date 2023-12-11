@@ -5,7 +5,7 @@ from uuid import uuid4
 import threading
 import time
 
-TOKEN = '6849899537:AAFPwGPOeZmzlLGApepGdZD04n3SYz9t5bM'
+TOKEN = BOT TOKEN
 
 #commands
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -109,7 +109,6 @@ async def check_options(update, context):
         # Set machine as used
         selected_machine.update()
         if selected_machine.used:
-            selected_machine.start_timer(30)
             await query.message.reply_text(f'You selected machine: {machine_name}. It is now marked as used.')
 
         else:
@@ -147,19 +146,15 @@ class machine:
 
     def start_timer(self, duration):
         self.elapsed_time = 0
-        self.timer = threading.Timer(duration * 60, self.timer_callback)
+        self.timer = threading.Timer(duration)
         self.timer.start()
-
-    def timer_callback(self):
-        print("Timer completed!")
-        # Do something when the timer completes, update the object, etc.
 
     def cancel_timer(self):
         if self.timer:
             self.timer.cancel()
             print("Timer canceled.")
 
-def get_elapsed_time(self):
+    def get_elapsed_time(self):
         return (1800 - self.elapsed_time)/60
 
 class block:
@@ -197,18 +192,12 @@ def main():
     
     #commands
     app.add_handler(CommandHandler('start', start_command))
-
     app.add_handler(CommandHandler('help', help_command))
-
     app.add_handler(CommandHandler('check', check_command))
-    app.add_handler(CallbackQueryHandler(check_options)) 
-
     app.add_handler(CommandHandler('using', using_command))
-    #app.add_handler(CallbackQueryHandler(machine_options))
-
     app.add_handler(CommandHandler('cancel', cancel_command))
 
-
+    app.add_handler(CallbackQueryHandler(check_options)) 
     #run
     app.run_polling(poll_interval=1)
 
