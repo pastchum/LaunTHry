@@ -85,14 +85,14 @@ async def check_options(update, context):
     
     elif context.user_data.get('command') == '/cancel':
         context.user_data['command'] = 'selected'
-        if available_machines:
+        if unavailable_machines:
             keyboard = [
                 [InlineKeyboardButton(machine.name, callback_data=f'{machine.block.block}_{machine.name}')] for machine in unavailable_machines
             ]
             reply_markup = InlineKeyboardMarkup(keyboard)
             await query.message.reply_text('Please choose the machine you are using:', reply_markup=reply_markup)
         else:
-            await query.message.reply_text('No available Machines')
+            await query.message.reply_text('All Machines available')
 
     elif context.user_data.get('command') == 'selected':
         query = update.callback_query
