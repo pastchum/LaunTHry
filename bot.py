@@ -9,8 +9,10 @@ TOKEN = BOT TOKEN
 
 #commands
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('Hello, thank you for using our bot. Please use /check to see which machines are being used, /using to declare if you are using a machine' +
-                                    'and /cancel to cancel your declaration of usage')
+    await update.message.reply_text('Hello, thank you for using our bot. Please use \n' +
+                                     '/check to see which machines are being used, \n' + 
+                                     '/using to declare if you are using a machine and \n' +
+                                     '/cancel to cancel your declaration of usage')
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('Hello, here are the available commands for the bot! \n' + 
